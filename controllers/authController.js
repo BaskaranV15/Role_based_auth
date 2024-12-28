@@ -1,54 +1,3 @@
-// const bcrypt = require('bcryptjs');
-// const User=require('../models/userModel');
-// const saltNum=12;
-// const register =async(req,res)=>
-// {
-//     try{
-//         const {username,password,role} = req.body;
-//         const hashedPassword = await bcrypt.hash(password,saltNum);
-
-//         // create a new user
-//         const newUSer=new User({username:username,password:hashedPassword,role:role});
-//         await newUSer.save();
-//         res.status(201).json({message:`${role} register with username ${username}`})
-//     }catch(err)
-//     {
-//         res.status(500).json({message:`something went wrong`})
-//     }
-// };
-
-// const login =async(req,res)=>
-// {
-//     try{    
-//         const{username,password}=req.body;
-//         const user=await User.findOne({username});
-
-//         if(!user)
-//         {
-//             return res.status(404).json(`User with username ${username} not fount`)
-//         }
-
-//         // if user matches 
-//         const isMatch =await bcrypt.compare(password,user.password);
-//         if(!isMatch){
-//             return res.status(400).json('Invalid Credentails')
-//         }
-
-//         const token = jwt.sign({id:user._id,role:user.role},process.env.JWT_SCERET,{expiresIn:"1h"});
-//         res.status(200).json({token});
-//     }
-//     catch(err)
-//     {
-//         res.status(500).json({message:`something went wrong`})
-//     }
-// };
-
-// module.exports={register,login};
-
-
-// const bcrypt = require('bcryptjs');
-// const jwt = require('jsonwebtoken'); // Ensure this is imported
-// const User = require('../models/userModel');
 const dotenv =require("dotenv").config()
 
 // Number of salt rounds for hashing passwords
@@ -89,53 +38,6 @@ const register = async (req, res) => {
         res.status(500).json({ message: 'Something went wrong during registration' });
     }
 };
-
-// Login an existing user
-// const login = async (req, res) => {
-//     try {
-//         const { username, password } = req.body;
-
-//         // Validate input
-//         if (!username || !password) {
-//             return res.status(400).json({ message: 'Username and password are required' });
-//         }
-
-//         // Find the user
-//         const user = await User.findOne({ username });
-//         if (!user) {
-//             return res.status(404).json({ message: `User with username ${username} not found` });
-//         }
-
-//         // Compare passwords
-//         const isMatch = await bcrypt.compare(password, user.password);
-//         if (!isMatch) {
-//             return res.status(400).json({ message: 'Invalid credentials' });
-//         }
-
-//         // Get the JWT secret
-//         const jwtSecret = process.env.JWT_SECRET;
-//         if (!jwtSecret) {
-//             console.error('JWT_SECRET is not defined');
-//             return res.status(500).json({ message: 'Server error: JWT secret not configured' });
-//         }
-
-//         // Generate token
-//         const token = jwt.sign(
-//             { id: user._id, role: user.role },
-//             jwtSecret,
-//             { expiresIn: '1h' }
-//         );
-
-//         res.status(200).json({
-//             message: 'Login successful',
-//             token,
-//             user: { username: user.username, role: user.role }
-//         });
-//     } catch (err) {
-//         console.error('Error during login:', err);
-//         res.status(500).json({ message: 'Something went wrong' });
-//     }
-// };
 
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');

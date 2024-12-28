@@ -5,22 +5,27 @@ const dotenv =require("dotenv").config()
 const app = express();
 const authRoutes=require('./routes/authRoutes')
 const userRoutes=require('./routes/userRouter')
-//add db config
+const questionRoutes = require('./routes/questionRoutes'); // Import question routes
+//add db connection
 const dbConnect=require('./config/dbconnection');
 dbConnect();
-// build in middleware
+// build in middleware for handling request
 app.use(express.json());
 
 // Routes
 app.use('/api/auth',authRoutes);
 
 app.use('/api/user',userRoutes);
+
+app.use('/api/questions', questionRoutes);
+
+
 // Server start 
 const PORT =  7001;
-// app.use('/',(req,res)=>
-// {
-//     res.send('welcome to quiz app');
-// })
+
+
+console.log('Registering /api/questions route');
+
 
 app.listen(PORT,()=>
 {

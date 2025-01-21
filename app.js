@@ -24,7 +24,7 @@ app.use('/api/questions', questionRoutes);
 const PORT =  7001;
 
 
-console.log('Registering /api/questions route');
+// console.log('Registering /api/questions route');
 
 
 app.listen(PORT,()=>
